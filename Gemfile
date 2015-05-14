@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in greyscale-sass-ink.gemspec
+# Specify your gem's dependencies in grayscale-sass-ink.gemspec
 gemspec

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'greyscale-sass-ink/version'
+require 'grayscale-sass-ink/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "greyscale-sass-ink"
-  spec.version       = GreyscaleSassInk::VERSION
+  spec.name          = "grayscale-sass-ink"
+  spec.version       = GrayscaleSassInk::VERSION
   spec.authors       = ["Douglas Beal"]
   spec.email         = ["git@dougbeal.com"]
 

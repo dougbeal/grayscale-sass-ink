@@ -1,2 +1,17 @@
+*~
 _site/
 .sass-cache/
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+.*-cache
+_site
+
+/bower_components/
+/node_modules/

@@ -1,0 +1,12 @@
+{
+  "name": "grayscale-sass-ink",
+  "homepage": "https://dougbeal.com",
+  "repository": "ssh://gritmonkey.com",
+  "main": "index.html",
+  "dependencies": {
+    "bower": "*"
+  },
+  "engines": {
+    "node": "*"
+  }
+}

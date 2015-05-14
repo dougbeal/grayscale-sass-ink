@@ -1,8 +1,10 @@
-/* Vendor imports */
+/* Equivalent to main.scss */
+
+  /* Vendor imports */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "vendor/hover";
+@import "hover";
 
 /* App imports */
-@import "app/_variables";
-@import "app/_greyscale";
+@import "variables";
+@import "grayscale";

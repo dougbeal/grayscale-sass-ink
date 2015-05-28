@@ -1,6 +1,99 @@
-require 'grayscale-sass-ink/version'
+require 'find'
+require 'jekyll'
+require 'jekyll/converters/scss'
 require 'octopress-ink'
 
+
+require 'grayscale-sass-ink/version'
+puts('greyscale-sass-ink.rb loaded')
+
+
+# add sass paths in bower components for sass engine search path
+module GrayscaleSassInk
+  module InkModifyLoadPaths
+    def bower_sass_load_paths
+      unless @bower_sass_load_paths
+        @bower_sass_load_paths = []
+        base = File.join Octopress::Ink.configuration["source"], "bower_components"
+        Find.find(base) do |path|
+          if FileTest.directory?(path)
+            basename = File.basename(path)
+            if ["scss", "stylesheets"].include? basename
+              sanitized_path = Jekyll.sanitized_path(base, path)
+              puts( "found path " + sanitized_path)
+              @bower_sass_load_paths << sanitized_path
+            else
+              next
+            end
+          end
+        end
+      end
+      @bower_sass_load_paths
+    end
+    def load_paths #sass_load_paths
+      Jekyll.logger.debug "grayscale-sass-ink: inserting bower sass/stylesheet paths. #{bower_sass_load_paths}"
+      (super + bower_sass_load_paths).uniq.select { |load_path|
+        !load_path.is_a?(String) || File.directory?(load_path)
+      }
+    end
+  end
+
+  module JekyllModifyLoadPaths
+    def bower_sass_load_paths
+      unless @bower_sass_load_paths
+        @bower_sass_load_paths = []
+        base = File.join Octopress::Ink.configuration["source"], "bower_components"
+        Find.find(base) do |path|
+          if FileTest.directory?(path)
+            basename = File.basename(path)
+            if ["scss", "stylesheets"].include? basename
+              sanitized_path = Jekyll.sanitized_path(base, path)
+              puts( "found path " + sanitized_path)
+              @bower_sass_load_paths << sanitized_path
+            else
+              next
+            end
+          end
+        end
+      end
+      @bower_sass_load_paths
+    end
+    def sass_load_paths
+      Jekyll.logger.debug "grayscale-sass-ink: inserting bower sass/stylesheet paths. #{bower_sass_load_paths}"
+      (super + bower_sass_load_paths).uniq.select { |load_path|
+        !load_path.is_a?(String) || File.directory?(load_path)
+      }
+    end
+  end
+
+  module AssetPathOverride
+    def add_javascripts
+      super
+      config['bower']['javascripts'].map do |component, files|
+        Jekyll.logger.debug "greyscale-sass-ink: #{component} javascript assets"
+        files.map do |file|
+          add_javascript_asset "..", file
+        end
+      end
+    end
+    def add_fonts
+      super
+      config['bower']['fonts'].map do |component, directory|
+        Jekyll.logger.debug "greyscale-sass-ink: #{component} font assets"
+        add_font_assets directory
+      end
+    end
+  end
+end
+
+
+
+Octopress::Ink::Assets::Sass.prepend GrayscaleSassInk::InkModifyLoadPaths
+Jekyll::Converters::Scss.prepend GrayscaleSassInk::JekyllModifyLoadPaths
+
+puts "create plugin"
+
+Octopress::Ink::Plugin.prepend GrayscaleSassInk::AssetPathOverride
 Octopress::Ink.add_plugin({
   name:          "Grayscale Octopress Ink Theme",
   slug:          "grayscale-sass-ink",

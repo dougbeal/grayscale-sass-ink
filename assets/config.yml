@@ -1,0 +1,19 @@
+exclude:
+  - node_modules
+  - bower_components
+
+include:
+
+bower:
+  javascripts:
+    bootstrap-sass:
+      - bower_components/bootstrap-sass/assets/javascripts/bootstrap.js
+    jquery.easing:
+      - bower_components/jquery.easing/js/jquery.easing.js
+    jquery:
+      - bower_components/jquery/dist/jquery.js
+  fonts:
+    bootstrap-sass:
+      - bower_components/bootstrap-sass/assets/fonts/bootstrap/
+    font-awesome:
+      - bower_components/font-awesome/fonts/

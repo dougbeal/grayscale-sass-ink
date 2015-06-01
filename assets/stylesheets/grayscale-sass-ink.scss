@@ -1,9 +1,12 @@
 /* Equivalent to main.scss */
 
+$fa-font-path:        "../grayscale-sass-ink/bower_components/font-awesome/fonts";
+$icon-font-path:      "../grayscale-sass-ink/bower_components/fonts/bootstrap";
   /* Vendor imports */
 //@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "hover";
+@import "font-awesome";
 
 /* App imports */
 @import "variables";

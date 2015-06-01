@@ -37,5 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "clash"
   spec.add_development_dependency "bower"
 
-  spec.extensions = %w[bower_install.rb]
+  spec.extensions = %w[extconf.rb]
 end

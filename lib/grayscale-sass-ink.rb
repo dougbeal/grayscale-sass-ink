@@ -71,8 +71,9 @@ module GrayscaleSassInk
       super
       config['bower']['javascripts'].map do |component, files|
         Jekyll.logger.debug "greyscale-sass-ink: #{component} javascript assets"
-        files.map do |file|
-          add_javascript_asset "..", file
+        files.each do |file|
+          full_path = File.join(@path, file)
+          add_javascript_asset("..", file) if File.exist?(full_path)
         end
       end
     end
@@ -80,7 +81,13 @@ module GrayscaleSassInk
       super
       config['bower']['fonts'].map do |component, directory|
         Jekyll.logger.debug "greyscale-sass-ink: #{component} font assets"
-        add_font_assets directory
+        full_dir = File.join(@path, directory)
+        glob_assets(full_dir).map do |file|
+          file = File.join(directory, File.basename(file))
+          asset = Octopress::Ink::Assets::Asset.new(self, "..", file)
+          @fonts << asset
+          puts("added font #{file}")
+        end
       end
     end
   end

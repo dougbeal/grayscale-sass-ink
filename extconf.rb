@@ -1,3 +1,3 @@
 require 'mkmf'
-exec 'sh bootstrap.sh'
-dummy_makefile '.'
+exec 'bash bootstrap.sh'
+File.open("Makefile", 'w') { |file| file.puts(dummy_makefile('.')) }

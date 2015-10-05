@@ -14,7 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "Hover": "~2.0.2",
+    "hover": "https://github.com/dougbeal/hover",
     "bootstrap-sass": ">=3.3.4",
     "font-awesome": "~4.3.0",
       "jquery": "~2.1.3",
